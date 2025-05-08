@@ -1,15 +1,19 @@
 CC=arm-none-eabi
 
-SRC=(*wildcard.c)
+SRC=$(wildcard *.c)
 
-all: startup.o main.o
+OBJ=$(SRC:.c=.o)
+
+BIN=executable
+
+all: $(BIN)
 
 clean:
 	rm -f *.o
+	rm -f $(BIN)
 
 %.o: %.c
 	${CC}-gcc $< -c -o $@
 
-#executable: $*.o
-#	${CC} 
-
+$(BIN): $(OBJ)
+	${CC}-ld -T 2_stm32f103.ld -o $(BIN) $^
