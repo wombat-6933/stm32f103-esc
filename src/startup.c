@@ -1,6 +1,8 @@
 #include<stdint.h>
 #define SRAM_DIR (uint32_t*) 0x20000000
+
 extern uint32_t* _etext, _edata, _ebss;
+void main (void);
 
 #include"vector_table.h"
 /* hay que:

@@ -1,3 +1,4 @@
+ENTRY(reset_handler)
 MEMORY
 {
 	FLASH (RX) : ORIGIN = 0x8000000, LENGTH = 512K
@@ -9,7 +10,8 @@ SECTIONS
 	.text : 
 	/*ALIGN(4)*/
 	{ 
-		startup.o(._vector_table) _evector_table = . ;
+		/*para debug quitar la tabla de vectores*/
+		/*startup.o(._vector_table) _evector_table = . ;*/
 		*(.text) _etext = . ; 
 	} > FLASH
 
