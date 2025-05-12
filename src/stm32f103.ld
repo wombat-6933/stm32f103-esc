@@ -1,17 +1,22 @@
-ENTRY(_start)
+ENTRY(reset_handler)
 
 MEMORY
 {
-	FLASH: ORIGIN = 0x8000000 , LENGTH = 512K
-	SRAM: ORIGIN = 0x20000000 , LENGTH = 96K
+	FLASH (RX) : ORIGIN = 0x8000000, LENGTH = 512K
+	SRAM (RWX) : ORIGIN = 0x20000000, LENGTH = 96K
 }
 SECTIONS
 {
 
 	.text : 
-	{ *(.text) _etext = . ; } > FLASH
+	/*ALIGN(4)*/
+	{ 
+		startup.o(._vector_table) _evector_table = . ;
+		*(.text) _etext = . ; 
+	} > FLASH
 
 	.data : 
-	{ *(.data) _edata = . ; }
+	/*ALIGN(4)*/
+	{ *(.data) _edata = . ; } > FLASH AT>SRAM
 
 }

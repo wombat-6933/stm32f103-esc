@@ -1,7 +1,7 @@
 CC=arm-none-eabi
+CFLAGS=-Wall -g -O0
 
 SRC=$(wildcard *.c)
-
 OBJ=$(SRC:.c=.o)
 
 BIN=executable
@@ -13,7 +13,7 @@ clean:
 	rm -f $(BIN)
 
 %.o: %.c
-	${CC}-gcc $< -c -o $@
+	${CC}-gcc $< $(CFLAGS) -c -o $@
 
 $(BIN): $(OBJ)
-	${CC}-ld -T 2_stm32f103.ld -o $(BIN) $^
+	${CC}-ld -T stm32f103.ld -o $(BIN) $^
