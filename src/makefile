@@ -1,11 +1,16 @@
 CC=arm-none-eabi
-CFLAGS=-Wall -mcpu=cortex-m3 -g -O0 
+CFLAGS=-Wall -mcpu=cortex-m3
 
 SRC=$(wildcard *.c)
 OBJ=$(SRC:.c=.o)
-LINKER_SCRIPT=debug_stm32f103.ld
-
+LINKER_SCRIPT=stm32f103.ld
 BIN=executable
+
+#-------- debug variables ---------
+DEBUG_OBJ=$(OBJ:.o=_debug.o)
+DEBUG_CFLAGS=-Wall -mcpu=cortex-m3 -g -O0 
+DEBUG_LINKER_SCRIPT=debug_stm32f103.ld
+
 
 all: $(BIN).bin
 
@@ -19,8 +24,14 @@ clean:
 $(BIN).elf: $(OBJ)
 	${CC}-ld -T $(LINKER_SCRIPT) -o $@ $^
 
-$(BIN).bin: $(BIN).elf
+%.bin: %.elf
 	${CC}-objcopy -O binary $< $@
 
-$(BIN).hex: $(BIN).elf
+%.hex: %.elf
 	${CC}-objcopy -O ihex $< $@
+
+#--------- debug receips ----------
+debug_$(BIN).elf: $(DEBUG_OBJ)
+	${CC}-ld -T $(DEBUG_LINKER_SCRIPT) -o $@ $^
+
+debug: debug_$(BIN).elf
