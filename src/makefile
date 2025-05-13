@@ -19,7 +19,7 @@ clean:
 	rm -f $(BIN)*
 
 %.o: %.c
-	${CC}-gcc $< $(CFLAGS) -c -o $@
+	${CC}-gcc $< $(DEBUG_CFLAGS) -c -o $@
 
 $(BIN).elf: $(OBJ)
 	${CC}-ld -T $(LINKER_SCRIPT) -o $@ $^

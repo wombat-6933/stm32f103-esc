@@ -2,6 +2,8 @@
 #define VECTOR_TABLE
 #include<stdint.h>
 
+#define END_SRAM 0x2
+#define _MSP_VALUE END_SRAM
 void default_Handler(void);
 void reset_handler(void);
 void nmi_handler(void) __attribute__ ((weak, alias("default_Handler")));
