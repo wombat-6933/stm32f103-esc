@@ -16,7 +16,7 @@ all: $(BIN).bin
 
 clean:
 	rm -f *.o
-	rm -f $(BIN)*
+	rm -f *.elf *.bin *.hex
 
 %.o: %.c
 	${CC}-gcc $< $(DEBUG_CFLAGS) -c -o $@
