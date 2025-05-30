@@ -2,7 +2,7 @@
 #define VECTOR_TABLE
 #include<stdint.h>
 
-#define BASE_SRAM (uint32_t) 0x20000000
+#define BASE_SRAM 0x20000000
 #define END_SRAM (BASE_SRAM + 56e3 - 1)
 #define _MSP_BASE_ END_SRAM
 

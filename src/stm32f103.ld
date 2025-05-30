@@ -15,6 +15,6 @@ SECTIONS
 
 	.data : 
 	/*ALIGN(4)*/
-	{ *(.data) _edata = . ; } > FLASH AT>SRAM
+	{ *(.data) _edata = . ; } > SRAM AT > FLASH
 
 }

@@ -5,6 +5,7 @@ void main (void);
 
 #include "vector_table.h"
 /* hay que:
+ * disable irq
  * hacer vector tabla copiar en flash
  * copiar data de flash a ram
  * llamar a main()
