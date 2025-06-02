@@ -13,11 +13,11 @@ void main (void);
 
 void _Reset_handler_(void)
 {
-	uint32_t *dstdata = BASE_SRAM;
+	uint32_t *dstdata = (uint32_t*) BASE_SRAM;
 
-	uint32_t *srcdata = _etext;
+	uint32_t *srcdata = (uint32_t*) _etext;
 
-	while (srcdata < _edata)
+	while ((uint32_t)srcdata < (uint32_t)_edata)
 	{
 		*dstdata = *srcdata;
 		dstdata++; 
