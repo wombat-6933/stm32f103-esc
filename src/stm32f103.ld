@@ -10,18 +10,30 @@ SECTIONS
 	ALIGN(4)
 	{ 
 		_svector_table = . ;
-		startup.o(._vector_table) _evector_table = . ;
+		KEEP(startup.o(._vector_table)) _evector_table = . ;
 		_stext = . ;
-		*(.text) _etext = . ; 
+		*(.text) 
+		_etext = . ; 
 	} > FLASH
 
 	.data : 
 	ALIGN(4)
-	{ _sdata = . ; *(.data) _edata = . ; } > SRAM AT > FLASH
+	{ 
+		_sdata = . ; 
+		*(.data) 
+		*(.data.*)
+		_edata = . ; 
+	} > SRAM AT > FLASH
 
 	.bss (NOLOAD):
 	ALIGN(4)
-	{ _sbss = . ; *(.bss) _ebss = . ; } > SRAM
+	{ 
+		_sbss = . ; 
+		*(.bss) 
+		*(.bss.*)
+		*(COMMON)
+		_ebss = . ; 
+	} > SRAM
 
 }
 	_s_lma_bss = LOADADDR(.bss);
