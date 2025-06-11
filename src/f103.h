@@ -31,8 +31,42 @@
 #define GPIOF_REG_BASE 0x40011C00
 #define GPIOG_REG_BASE 0x40012000
 
-#define GPIO_PIN_T enum gpio_pin
-#define GPIO_MODE_T enum gpio_mode
-#define GPIO_CNF_T enum gpio_cnf
+typedef enum 
+{
+	INPUT = 0b00,
+	OUTPUT_10MHZ = 0b01,
+	OUTPUT_2MHZ = 0b10,
+	OUTPUT_50MHZ = 0b11
+}gpio_mode_t;
+
+typedef enum 
+{
+	IN_ANALOG_OUT_PUSHPULL = 0b00,
+	IN_FLOAT_OUT_OPENDRAIN = 0b01,
+	IN_PULLUPDOWN_AF_PUSHPULL = 0b10,
+	AF_OPENDRAIN = 0b11
+}gpio_cnf_t;
+
+typedef enum 
+{
+	GPIO_PIN_0,
+	GPIO_PIN_1,
+	GPIO_PIN_2,
+	GPIO_PIN_3,
+	GPIO_PIN_4,
+	GPIO_PIN_5,
+	GPIO_PIN_6,
+	GPIO_PIN_7,
+	GPIO_PIN_8,
+	GPIO_PIN_9,
+	GPIO_PIN_10,
+	GPIO_PIN_11,
+	GPIO_PIN_12,
+	GPIO_PIN_13,
+	GPIO_PIN_14,
+	GPIO_PIN_15
+}gpio_pin_t;
+
+void config_gpio_port_A (gpio_pin_t pin, gpio_mode_t mode, gpio_cnf_t cnf);
 
 #endif
