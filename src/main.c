@@ -15,7 +15,7 @@ int main(void)
 	{
 		GPIOA_ODR |= (1 << GPIO_PIN_2);
 		for (uint32_t i=0; i<0x01000000; i++);
-		GPIOA_ODR |= (0 << GPIO_PIN_2);
+		GPIOA_ODR &= ~(1 << GPIO_PIN_2);
 		for (uint32_t i=0; i<0x01000000; i++);
 	}
 	while (1);
