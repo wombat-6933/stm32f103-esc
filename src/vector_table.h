@@ -6,6 +6,8 @@
 #define END_SRAM (BASE_SRAM + 56e3 - 1)
 #define _MSP_BASE_ END_SRAM
 
+extern uint32_t __START_STACK;
+
 void default_Handler(void);
 
 // ---- exception declaration ---
@@ -25,7 +27,7 @@ void _SysTick_(void) __attribute__ ((weak, alias("default_Handler")));
 uint32_t vector_table[] __attribute__ ((section("._vector_table"))) =
 {
 // ---- exceptions ------
-(uint32_t)	_MSP_BASE_,
+(uint32_t)	&__START_STACK,
 (uint32_t)	_Reset_handler_,
 (uint32_t)	_NMI_,
 (uint32_t)	_HardFault_,

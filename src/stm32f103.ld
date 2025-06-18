@@ -1,7 +1,12 @@
+__STACK_SIZE = 0x00000C00;
+__HEAP_SIZE  = 0x00000A00;
+
+OUTPUT_ARCH(arm)
+
 MEMORY
 {
-	FLASH (RX) : ORIGIN = 0x8000000, LENGTH = 512K
-	SRAM (RWX) : ORIGIN = 0x20000000, LENGTH = 96K
+	FLASH (RX) : ORIGIN = 0x8000000, LENGTH = 128K
+	SRAM (RWX) : ORIGIN = 0x20000000, LENGTH = 20K
 }
 SECTIONS
 {
@@ -33,6 +38,22 @@ SECTIONS
 		*(.bss.*)
 		*(COMMON)
 		_ebss = . ; 
+	} > SRAM
+
+	.heap (NOLOAD) :
+	{
+		. = ALIGN(8);
+		__END_HEAP = .;
+		. = __HEAP_SIZE;
+		__START_HEAP = .;
+	} > SRAM
+
+	.stack (NOLOAD) :
+	{
+		. = ALIGN(8);
+		__END_STACK = .;
+		. = __STACK_SIZE;
+		__START_STACK = .;
 	} > SRAM
 
 }

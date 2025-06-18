@@ -5,6 +5,7 @@ extern uint32_t _sdata, _edata;
 extern uint32_t _sbss, _ebss;
 extern uint32_t _s_lma_data, _e_lma_data;
 extern uint32_t _s_lma_bss, _e_lma_bss;
+
 void main (void);
 
 #include "vector_table.h"
