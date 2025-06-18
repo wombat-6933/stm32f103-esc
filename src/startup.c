@@ -34,11 +34,14 @@ void _Reset_handler_(void)
 	}
 
 	uint32_t *dstbss = &_sbss;
+	uint32_t *srcbss = &_s_lma_bss;
 
-	while (dstbss < &_e_lma_bss)
+	// revisar en placa
+	while (srcbss < &_e_lma_bss)
 	{
 		*dstbss = 0;
 		dstbss++; 
+		srcbss++;
 	}
 
 	main();
